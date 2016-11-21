@@ -17,30 +17,18 @@
         <StackPanel Grid.Column="0" Orientation="Vertical">
             <ListView  x:Name="MainList" 
               ItemsSource="{x:Bind WordModel.Words, Mode=OneWay}"  
-              SelectedIndex="{x:Bind WordModel.SelectedIndex, Mode=TwoWay}" 
               MinWidth="250" Margin="5">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:WordViewModel" >
+                        <StackPanel>
                         <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
+                        <TextBlock Text="{x:Bind Definition, Mode=OneWay}" />
+                        <TextBlock Text="{x:Bind Example, Mode=OneWay}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
 
-        <StackPanel Grid.Column="0" Orientation="Vertical">
-            
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Orientation="Vertical" Visibility="{x:Bind WordModel.SelectedWord, Mode=OneWay, Converter={StaticResource ObjectExistsToVisible}}" >
-            <TextBox 
-              Text="{x:Bind WordModel.SelectedWord.Type, Mode=TwoWay, FallbackValue=''}" 
-              Margin="5" />
-            <TextBox 
-              Text="{x:Bind WordModel.SelectedWord.Definition, Mode=TwoWay, FallbackValue=''}" 
-              Margin="5" />
-            <TextBox 
-              Text="{x:Bind WordModel.SelectedWord.Example, Mode=TwoWay, FallbackValue=''}" 
-              Margin="5" />
-        </StackPanel>
     </Grid>
 </Page>

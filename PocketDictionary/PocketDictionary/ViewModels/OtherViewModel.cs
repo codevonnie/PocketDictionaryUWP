@@ -11,12 +11,24 @@ namespace ViewModels
 {
     public class OtherViewModel : NotificationBase
     {
+        //public WordModel wordmodel { get; set; }
         WordModel wordmodel;
-
+/*
+        public async Task<OtherViewModel> StartAsyncView()
+        {
+            this.wordmodel = await new WordModel().StartAsync();
+            foreach (var word in wordmodel.Words)
+            {
+                var np = new WordViewModel(word);
+                _Word.Add(np);
+            }
+            return this;
+        }
+        */
         public OtherViewModel()
         {
             wordmodel = new WordModel();
-            _SelectedIndex = -1;
+
             // Load the database
             foreach (var word in wordmodel.Words)
             {
@@ -24,13 +36,16 @@ namespace ViewModels
                 _Word.Add(np);
             }
         }
+        
 
         ObservableCollection<WordViewModel> _Word
            = new ObservableCollection<WordViewModel>();
         public ObservableCollection<WordViewModel> Words
         {
             get { return _Word; }
-            //set { SetProperty(ref _Word, value); }
+            set { SetProperty(ref _Word, value);
+                RaisePropertyChanged("WordModel");
+            }
         }
 
         public String Type
@@ -38,21 +53,16 @@ namespace ViewModels
             get { return wordmodel.WordName; }
         }
 
-        int _SelectedIndex;
-        public int SelectedIndex
+        public String Definition
         {
-            get { return _SelectedIndex; }
-            set
-            {
-                if (SetProperty(ref _SelectedIndex, value))
-                { RaisePropertyChanged(nameof(SelectedWord)); }
-            }
+            get { return wordmodel.WordName; }
         }
 
-        public WordViewModel SelectedWord
+        public String Example
         {
-            get { return (_SelectedIndex >= 0) ? _Word[_SelectedIndex] : null; }
+            get { return wordmodel.WordName; }
         }
+
 
 
     }

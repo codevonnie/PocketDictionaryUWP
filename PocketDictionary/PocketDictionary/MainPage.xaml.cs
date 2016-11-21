@@ -30,10 +30,12 @@ namespace PocketDictionary
         }
 
         public OtherViewModel WordModel { get; set; }
-
-        private void Search_Click(object sender, RoutedEventArgs e)
+        /*
+        async void Button_Click(object s, EventArgs e)
         {
-
+            // call start as if it is a constructor
+            this.WordModel = await new OtherViewModel().StartAsyncView();
         }
+        */
     }
 }

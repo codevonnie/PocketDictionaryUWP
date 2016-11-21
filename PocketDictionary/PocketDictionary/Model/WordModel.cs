@@ -17,27 +17,36 @@ namespace Model
         public List<Words> Words { get; set; }
         public static List<Words> myWordList = new List<Words>();
         public String WordName { get; set; }
-
-        public WordModel()
+        
+       public WordModel()
         {
             LoadData();
             Words = myWordList;
+         
         }
+
+        /*
+        public async Task<WordModel> StartAsync()
+        {
+            await GetData();
+            Words = myWordList;
+            return this;
+        }
+        */
 
         public static async Task LoadData()
         {
             await GetData();
         }
-
         public static async Task GetData()
         {
-            //HttpClient client = new HttpClient();
-            //HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/owl"));
-            //string result = await response.Content.ReadAsStringAsync();
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/owl"));
+            string result = await response.Content.ReadAsStringAsync();
 
             
-            var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
-            var result = await FileIO.ReadTextAsync(file);
+            //var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
+            //var result = await FileIO.ReadTextAsync(file);
             var wordList = JsonArray.Parse(result);
             CreateWordList(wordList);
         }
