@@ -13,7 +13,7 @@ namespace ViewModels
     {
         WordModel wordmodel;
 
-        public OtherViewModel()
+        public OtherViewModel(String WordName)
         {
             wordmodel = new WordModel();
             _SelectedIndex = -1;
@@ -21,6 +21,7 @@ namespace ViewModels
             foreach (var word in wordmodel.Words)
             {
                 var np = new WordViewModel(word);
+                np.PropertyChanged += Word_OnNotifyPropertyChanged;
                 _Word.Add(np);
             }
         }
@@ -52,6 +53,18 @@ namespace ViewModels
         public WordViewModel SelectedWord
         {
             get { return (_SelectedIndex >= 0) ? _Word[_SelectedIndex] : null; }
+        }
+
+        public void Add()
+        {
+            var word = new WordViewModel();
+            word.PropertyChanged += Word_OnNotifyPropertyChanged;
+
+        }
+
+        void Word_OnNotifyPropertyChanged(Object sender, PropertyChangedEventArgs e)
+        {
+            //wordmodel.Update((WordViewModel)sender);
         }
 
 

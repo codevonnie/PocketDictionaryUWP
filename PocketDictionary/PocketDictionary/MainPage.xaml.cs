@@ -26,7 +26,7 @@ namespace PocketDictionary
         public MainPage()
         {
             this.InitializeComponent();
-            WordModel = new OtherViewModel();
+            WordModel = new OtherViewModel("dictionary");
         }
 
         public OtherViewModel WordModel { get; set; }
