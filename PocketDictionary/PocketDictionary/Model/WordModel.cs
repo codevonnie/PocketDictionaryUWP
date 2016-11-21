@@ -31,13 +31,13 @@ namespace Model
 
         public static async Task GetData()
         {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/owl"));
-            string result = await response.Content.ReadAsStringAsync();
+            //HttpClient client = new HttpClient();
+            //HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/owl"));
+            //string result = await response.Content.ReadAsStringAsync();
 
             
-            //var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
-            //var result = await FileIO.ReadTextAsync(file);
+            var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
+            var result = await FileIO.ReadTextAsync(file);
             var wordList = JsonArray.Parse(result);
             CreateWordList(wordList);
         }
@@ -68,9 +68,9 @@ namespace Model
                             break;
                         
                     } // end switch
-                } // end foreach(var key in oneDog.Keys )
+                } // end foreach(var key)
                 myWordList.Add(aWord);
-            } // end foreach (var item in jDogList)
+            } // end foreach (var item )
         }
 
     }

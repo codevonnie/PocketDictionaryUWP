@@ -30,7 +30,7 @@ namespace ViewModels
         public ObservableCollection<WordViewModel> Words
         {
             get { return _Word; }
-            // set { SetProperty(ref _Dog, value); }
+            //set { SetProperty(ref _Word, value); }
         }
 
         public String Type

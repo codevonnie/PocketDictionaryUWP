@@ -27,6 +27,10 @@
             </ListView>
         </StackPanel>
 
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            
+        </StackPanel>
+
         <StackPanel Grid.Column="2" Orientation="Vertical" Visibility="{x:Bind WordModel.SelectedWord, Mode=OneWay, Converter={StaticResource ObjectExistsToVisible}}" >
             <TextBox 
               Text="{x:Bind WordModel.SelectedWord.Type, Mode=TwoWay, FallbackValue=''}" 
@@ -37,7 +41,6 @@
             <TextBox 
               Text="{x:Bind WordModel.SelectedWord.Example, Mode=TwoWay, FallbackValue=''}" 
               Margin="5" />
- 
         </StackPanel>
     </Grid>
 </Page>
