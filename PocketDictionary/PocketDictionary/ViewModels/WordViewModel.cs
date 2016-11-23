@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data;
+using Model;
 
 namespace ViewModels
 {
-    public class WordViewModel : NotificationBase<Words>
+    public class WordViewModel : NotificationBase<WordModel>
     {
-        public WordViewModel(Words myWords = null) : base(myWords) { }
+        public WordViewModel(WordModel myWords = null) : base(myWords) { }
         public String Type
         {
             get { return This.type; }

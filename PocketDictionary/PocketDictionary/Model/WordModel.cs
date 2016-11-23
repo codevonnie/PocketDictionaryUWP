@@ -14,6 +14,7 @@ namespace Model
 {
     public class WordModel
     {
+<<<<<<< HEAD
         public List<Words> Words { get; set; }
         public static List<Words> myWordList = new List<Words>();
         public String WordName { get; set; }
@@ -49,38 +50,22 @@ namespace Model
             //var result = await FileIO.ReadTextAsync(file);
             var wordList = JsonArray.Parse(result);
             CreateWordList(wordList);
-        }
+=======
 
-        private static void CreateWordList(JsonArray wordList)
+        public string type { get; set; }
+        public string definition { get; set; }
+        public string example { get; set; }
+        public string WordName { get; set; }
+
+        public WordModel() { }
+
+        public WordModel(string t, string d, string e)
         {
-            foreach (var item in wordList)
-            {
-                var oneWord = item.GetObject();
-                Words aWord = new Words();
-
-                foreach (var key in oneWord.Keys)
-                {
-                    IJsonValue value;
-                    if (!oneWord.TryGetValue(key, out value))
-                        continue;
-
-                    switch (key)
-                    {
-                        case "type":
-                            aWord.type = value.GetString();
-                            break;
-                        case "defenition":
-                            aWord.definition = value.GetString();
-                            break;
-                        case "example":
-                            aWord.example = value.GetString();
-                            break;
-                        
-                    } // end switch
-                } // end foreach(var key)
-                myWordList.Add(aWord);
-            } // end foreach (var item )
+            type = t;
+            definition = d;
+            example = e;
+>>>>>>> refs/remotes/origin/Restructure
         }
-
+      
     }
 }
