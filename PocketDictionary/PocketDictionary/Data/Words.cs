@@ -16,12 +16,12 @@ namespace Data
 
         public static WordModel myWord;
         
-        public static async Task<WordModel> GetDefinitionAsync()
+        public static async Task<WordModel> GetDefinitionAsync(String input)
         {
             await Task.Delay(3000);
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/dictionary"));
+            HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/" + input));
             string result = await response.Content.ReadAsStringAsync();
 
             //var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
@@ -30,7 +30,7 @@ namespace Data
 
             foreach (var item in wordList)
             {
-                var oneWord = item.GetObject();
+               var oneWord = item.GetObject();
                WordModel aWord = new WordModel();
 
                 foreach (var key in oneWord.Keys)
@@ -48,12 +48,21 @@ namespace Data
                             aWord.definition = value.GetString();
                             break;
                         case "example":
-                            aWord.example = value.GetString();
+                            try
+                            {
+                                aWord.example = value.GetString();
+                            }
+                            catch
+                            {
+                                aWord.example = "no example";
+                            }
+                                
                             break;
 
                     } // end switch
                 } // end foreach(var key)
                 //myWordList.Add(aWord);
+                //aWord.WordName = input;
                 myWord = aWord;
             } // end foreach (var item )
 

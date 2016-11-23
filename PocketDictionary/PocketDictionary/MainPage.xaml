@@ -11,15 +11,26 @@
 
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Grid.Column="0" Orientation="Vertical">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*" />
+            <RowDefinition Height="1.8*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+
+
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
             <StackPanel.DataContext>
                 <viewModels:OtherViewModel/>
             </StackPanel.DataContext>
-            <ListView  x:Name="MainList" 
-              ItemsSource="{x:Bind WordModel.WordVM, Mode=OneWay}"  
-              MinWidth="250" Margin="5">
+            <ListView x:Name="MainList" 
+        		ItemsSource="{x:Bind WordModel.WordVM, Mode=OneWay}"  
+        		MinWidth="250" Margin="5" Height="315" Background="#FFECE220" BorderThickness="38,23,28,32" FontWeight="Bold">
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="viewModels:WordViewModel" >
+                    <DataTemplate x:DataType="viewModels:WordViewModel">
                         <StackPanel>
                             <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
                             <TextBlock Text="{x:Bind Definition, Mode=OneWay}" />
@@ -29,7 +40,11 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
-        
 
+        <StackPanel Grid.Row="0">
+            <TextBox x:Name="inputText" />
+            <Button x:Name="searchBtn" Click="searchBtn_Click" Height="33" Width="360">Search</Button>
+
+        </StackPanel>
     </Grid>
 </Page>

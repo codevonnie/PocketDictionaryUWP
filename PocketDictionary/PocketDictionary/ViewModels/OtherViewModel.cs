@@ -12,18 +12,20 @@ namespace ViewModels
 {
     public class OtherViewModel : NotificationBase
     {
-
-        
         public WordModel wordmodel { get; set; }
+        //public string wordInput { get; set; }
 
-      
 
-        public OtherViewModel()
+
+        public OtherViewModel(String input)
         {
             wordmodel = new WordModel();
-            LoadData();
+            var wordInput = input;
+            LoadData(wordInput);
             
         }
+
+        public OtherViewModel() { }
         
 
         ObservableCollection<WordViewModel> _Word
@@ -38,10 +40,10 @@ namespace ViewModels
                     }
                 }
 
-        public async void LoadData()
+        public async void LoadData(String input)
         {
             try {
-                wordmodel = await Words.GetDefinitionAsync();
+                wordmodel = await Words.GetDefinitionAsync(input);
                 var np = new WordViewModel(wordmodel);
                 _Word.Add(np);
 
