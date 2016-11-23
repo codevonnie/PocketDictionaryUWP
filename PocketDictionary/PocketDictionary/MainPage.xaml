@@ -16,24 +16,14 @@
                 <viewModels:OtherViewModel/>
             </StackPanel.DataContext>
             <ListView  x:Name="MainList" 
-<<<<<<< HEAD
-              ItemsSource="{x:Bind WordModel.Words, Mode=OneWay}"  
-=======
               ItemsSource="{x:Bind WordModel.WordVM, Mode=OneWay}"  
->>>>>>> refs/remotes/origin/Restructure
               MinWidth="250" Margin="5">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:WordViewModel" >
                         <StackPanel>
-<<<<<<< HEAD
-                        <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
-                        <TextBlock Text="{x:Bind Definition, Mode=OneWay}" />
-                        <TextBlock Text="{x:Bind Example, Mode=OneWay}" />
-=======
                             <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
                             <TextBlock Text="{x:Bind Definition, Mode=OneWay}" />
                             <TextBlock Text="{x:Bind Example, Mode=OneWay}" />
->>>>>>> refs/remotes/origin/Restructure
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

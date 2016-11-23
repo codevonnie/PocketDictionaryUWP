@@ -12,46 +12,17 @@ namespace ViewModels
 {
     public class OtherViewModel : NotificationBase
     {
-<<<<<<< HEAD
-        //public WordModel wordmodel { get; set; }
-        WordModel wordmodel;
-/*
-        public async Task<OtherViewModel> StartAsyncView()
-        {
-            this.wordmodel = await new WordModel().StartAsync();
-            foreach (var word in wordmodel.Words)
-            {
-                var np = new WordViewModel(word);
-                _Word.Add(np);
-            }
-            return this;
-        }
-        */
-        public OtherViewModel()
-        {
-            wordmodel = new WordModel();
-
-            // Load the database
-            foreach (var word in wordmodel.Words)
-            {
-                var np = new WordViewModel(word);
-                _Word.Add(np);
-            }
-=======
-        public WordModel wordmodel { get; set; }
-
-        //private List<WordModel> _wordModel = new List<WordModel>();
-
-        //WordModel wordmodel;
 
         
+        public WordModel wordmodel { get; set; }
+
+      
 
         public OtherViewModel()
         {
             wordmodel = new WordModel();
             LoadData();
             
->>>>>>> refs/remotes/origin/Restructure
         }
         
 
@@ -69,12 +40,6 @@ namespace ViewModels
 
         public async void LoadData()
         {
-<<<<<<< HEAD
-            get { return _Word; }
-            set { SetProperty(ref _Word, value);
-                RaisePropertyChanged("WordModel");
-            }
-=======
             try {
                 wordmodel = await Words.GetDefinitionAsync();
                 var np = new WordViewModel(wordmodel);
@@ -86,7 +51,6 @@ namespace ViewModels
 
             }
             
->>>>>>> refs/remotes/origin/Restructure
         }
 
         public String Type

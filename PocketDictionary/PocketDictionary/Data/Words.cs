@@ -13,9 +13,6 @@ namespace Data
 {
     public class Words
     {
-        //private static List<WordModel> wmodel;
-
-        //public static List<WordModel> myWordList = new List<WordModel>();
 
         public static WordModel myWord;
         
