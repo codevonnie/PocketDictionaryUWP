@@ -26,14 +26,11 @@ namespace PocketDictionary
         public MainPage()
         {
             this.InitializeComponent();
-            WordModel = new OtherViewModel("dictionary");
+            WordModel = new OtherViewModel();
         }
 
         public OtherViewModel WordModel { get; set; }
 
-        private void Search_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

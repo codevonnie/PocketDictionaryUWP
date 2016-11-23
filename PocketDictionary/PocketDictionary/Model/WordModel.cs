@@ -14,19 +14,20 @@ namespace Model
 {
     public class WordModel
     {
-        public List<Words> Words { get; set; }
-        public static List<Words> myWordList = new List<Words>();
-        public String WordName { get; set; }
 
-        public WordModel()
+        public string type { get; set; }
+        public string definition { get; set; }
+        public string example { get; set; }
+        public string WordName { get; set; }
+
+        public WordModel() { }
+
+        public WordModel(string t, string d, string e)
         {
-            Update();
+            type = t;
+            definition = d;
+            example = e;
         }
-
-        public static async Task<List<Words>> Update()
-        {
-            return myWordList = (await DataService.GetDefinition());
-
-        }
+      
     }
 }

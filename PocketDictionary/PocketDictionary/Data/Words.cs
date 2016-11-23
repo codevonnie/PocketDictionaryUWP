@@ -7,36 +7,34 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Data.Json;
 using Windows.Storage;
+using Model;
 
 namespace Data
 {
     public class Words
     {
-        public string type { get; set; }
-        public string definition { get; set; }
-        public string example { get; set; }
-    }
+        //private static List<WordModel> wmodel;
 
-    public class DataService
-    {
-        //public static String Name = "Fake Data Service.";
-        public static List<Words> myWordList = new List<Words>();
+        //public static List<WordModel> myWordList = new List<WordModel>();
 
-        public static async Task<List<Words>> GetDefinition()
+        public static WordModel myWord;
+        
+        public static async Task<WordModel> GetDefinitionAsync()
         {
-            //HttpClient client = new HttpClient();
-            //HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/owl"));
-            //string result = await response.Content.ReadAsStringAsync();
+            await Task.Delay(3000);
 
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/dictionary"));
+            string result = await response.Content.ReadAsStringAsync();
 
-            var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
-            var result = await FileIO.ReadTextAsync(file);
+            //var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
+            //var result = await FileIO.ReadTextAsync(file);
             var wordList = JsonArray.Parse(result);
 
             foreach (var item in wordList)
             {
                 var oneWord = item.GetObject();
-                Words aWord = new Words();
+               WordModel aWord = new WordModel();
 
                 foreach (var key in oneWord.Keys)
                 {
@@ -58,19 +56,13 @@ namespace Data
 
                     } // end switch
                 } // end foreach(var key)
-                myWordList.Add(aWord);
+                //myWordList.Add(aWord);
+                myWord = aWord;
             } // end foreach (var item )
 
-            return myWordList;
-
-        }
-
-        public static void Write(Words words)
-        {
-            //Debug.WriteLine("INSERT person with name " + person.Name);
-        }
-
         
+            return myWord;
+        }
     }
 
 }

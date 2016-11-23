@@ -6,41 +6,30 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="using:ViewModels"
-    xmlns:converters="using:Converters"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <converters:ObjectExistsToVisible x:Key="ObjectExistsToVisible" />
-    </Page.Resources>
+
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Grid.Column="0" Orientation="Vertical">
+            <StackPanel.DataContext>
+                <viewModels:OtherViewModel/>
+            </StackPanel.DataContext>
             <ListView  x:Name="MainList" 
-              ItemsSource="{x:Bind WordModel.Words, Mode=OneWay}"  
-              SelectedIndex="{x:Bind WordModel.SelectedIndex, Mode=TwoWay}" 
+              ItemsSource="{x:Bind WordModel.WordVM, Mode=OneWay}"  
               MinWidth="250" Margin="5">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:WordViewModel" >
-                        <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
+                        <StackPanel>
+                            <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
+                            <TextBlock Text="{x:Bind Definition, Mode=OneWay}" />
+                            <TextBlock Text="{x:Bind Example, Mode=OneWay}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackPanel>
+        
 
-        <StackPanel Grid.Column="0" Orientation="Vertical">
-            
-        </StackPanel>
-
-        <StackPanel Grid.Column="2" Orientation="Vertical" Visibility="{x:Bind WordModel.SelectedWord, Mode=OneWay, Converter={StaticResource ObjectExistsToVisible}}" >
-            <TextBox 
-              Text="{x:Bind WordModel.SelectedWord.Type, Mode=TwoWay, FallbackValue=''}" 
-              Margin="5" />
-            <TextBox 
-              Text="{x:Bind WordModel.SelectedWord.Definition, Mode=TwoWay, FallbackValue=''}" 
-              Margin="5" />
-            <TextBox 
-              Text="{x:Bind WordModel.SelectedWord.Example, Mode=TwoWay, FallbackValue=''}" 
-              Margin="5" />
-        </StackPanel>
     </Grid>
 </Page>

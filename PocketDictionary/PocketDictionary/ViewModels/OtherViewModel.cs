@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using Data;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 
@@ -11,27 +12,46 @@ namespace ViewModels
 {
     public class OtherViewModel : NotificationBase
     {
-        WordModel wordmodel;
+        public WordModel wordmodel { get; set; }
 
-        public OtherViewModel(String WordName)
+        //private List<WordModel> _wordModel = new List<WordModel>();
+
+        //WordModel wordmodel;
+
+        
+
+        public OtherViewModel()
         {
             wordmodel = new WordModel();
-            _SelectedIndex = -1;
-            // Load the database
-            foreach (var word in wordmodel.Words)
-            {
-                var np = new WordViewModel(word);
-                np.PropertyChanged += Word_OnNotifyPropertyChanged;
-                _Word.Add(np);
-            }
+            LoadData();
+            
         }
 
         ObservableCollection<WordViewModel> _Word
            = new ObservableCollection<WordViewModel>();
-        public ObservableCollection<WordViewModel> Words
+        
+                public ObservableCollection<WordViewModel> WordVM
+                {
+                    get { return _Word; }
+                    set
+                    {
+                        SetProperty(ref _Word, value);                        
+                    }
+                }
+
+        public async void LoadData()
         {
-            get { return _Word; }
-            //set { SetProperty(ref _Word, value); }
+            try {
+                wordmodel = await Words.GetDefinitionAsync();
+                var np = new WordViewModel(wordmodel);
+                _Word.Add(np);
+
+            }
+            catch
+            {
+
+            }
+            
         }
 
         public String Type
@@ -39,32 +59,14 @@ namespace ViewModels
             get { return wordmodel.WordName; }
         }
 
-        int _SelectedIndex;
-        public int SelectedIndex
+        public String Definition
         {
-            get { return _SelectedIndex; }
-            set
-            {
-                if (SetProperty(ref _SelectedIndex, value))
-                { RaisePropertyChanged(nameof(SelectedWord)); }
-            }
+            get { return wordmodel.WordName; }
         }
 
-        public WordViewModel SelectedWord
+        public String Example
         {
-            get { return (_SelectedIndex >= 0) ? _Word[_SelectedIndex] : null; }
-        }
-
-        public void Add()
-        {
-            var word = new WordViewModel();
-            word.PropertyChanged += Word_OnNotifyPropertyChanged;
-
-        }
-
-        void Word_OnNotifyPropertyChanged(Object sender, PropertyChangedEventArgs e)
-        {
-            //wordmodel.Update((WordViewModel)sender);
+            get { return wordmodel.WordName; }
         }
 
 
