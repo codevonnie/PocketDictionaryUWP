@@ -26,7 +26,7 @@ namespace Data
             string result = await response.Content.ReadAsStringAsync();
             if (result == null)
             {
-                 
+                return myWord;
             }
 
             var wordList = JsonArray.Parse(result);

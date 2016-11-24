@@ -7,6 +7,7 @@ using Model;
 using Data;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 
 namespace ViewModels
 {
@@ -43,8 +44,17 @@ namespace ViewModels
         {
             try {
                 wordmodel = await Words.GetDefinitionAsync(input);
-                var np = new WordViewModel(wordmodel);
-                _Word.Add(np);
+                if(wordmodel != null)
+                {
+                    var np = new WordViewModel(wordmodel);
+                    _Word.Add(np);
+                }
+                else
+                {
+                    var dialog = new MessageDialog("Word not found - check your spelling");
+                    await dialog.ShowAsync();
+                }
+                
 
             }
             catch
