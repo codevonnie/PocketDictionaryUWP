@@ -19,11 +19,18 @@ namespace Data
         public static async Task<WordModel> GetDefinitionAsync(String input)
         {
             await Task.Delay(3000);
+            myWord = null;
 
             HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(new Uri("https://owlbot.info/api/v1/dictionary/" + input));
-            string result = await response.Content.ReadAsStringAsync();
+            //HttpResponseMessage response = await client.GetAsync(new Uri(input));
+            Uri requestUri = new Uri("https://owlbot.info/api/v1/dictionary/" + input);
+            HttpResponseMessage response = await client.GetAsync(requestUri);
 
+            string result = await response.Content.ReadAsStringAsync();
+            if (result == null)
+            {
+                 
+            }
             //var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
             //var result = await FileIO.ReadTextAsync(file);
             var wordList = JsonArray.Parse(result);
@@ -42,19 +49,33 @@ namespace Data
                     switch (key)
                     {
                         case "type":
-                            aWord.type = value.GetString();
+                            try
+                            {
+                                aWord.type = "Type: " + value.GetString();
+                            }
+                            catch
+                            {
+                                aWord.type = "";
+                            }
                             break;
                         case "defenition":
-                            aWord.definition = value.GetString();
+                            try
+                            {
+                                aWord.definition = "Definition: " + value.GetString();
+                            }
+                            catch
+                            {
+                                aWord.definition = "";
+                            }
                             break;
                         case "example":
                             try
                             {
-                                aWord.example = value.GetString();
+                                aWord.example = "Example: " + value.GetString();
                             }
                             catch
                             {
-                                aWord.example = "no example";
+                                aWord.example = "";
                             }
                                 
                             break;
@@ -66,7 +87,6 @@ namespace Data
                 myWord = aWord;
             } // end foreach (var item )
 
-        
             return myWord;
         }
     }

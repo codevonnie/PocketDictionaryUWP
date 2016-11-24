@@ -32,9 +32,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:WordViewModel">
                         <StackPanel>
-                            <TextBlock Text="{x:Bind Type, Mode=OneWay}" />
-                            <TextBlock Text="{x:Bind Definition, Mode=OneWay}" />
-                            <TextBlock Text="{x:Bind Example, Mode=OneWay}" />
+                            <TextBlock Text="{x:Bind Type, Mode=TwoWay}" />
+                            <TextBlock Text="{x:Bind Definition, Mode=TwoWay}" />
+                            <TextBlock Text="{x:Bind Example, Mode=TwoWay}" />
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -43,7 +43,7 @@
 
         <StackPanel Grid.Row="0">
             <TextBox x:Name="inputText" />
-            <Button x:Name="searchBtn" Click="searchBtn_Click" Height="33" Width="360">Search</Button>
+            <Button x:Name="searchBtn" Height="33" Width="360" Click="searchBtn_Click">Search</Button>
 
         </StackPanel>
     </Grid>

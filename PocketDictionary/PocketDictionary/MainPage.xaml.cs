@@ -25,17 +25,22 @@ namespace PocketDictionary
     {
         public MainPage()
         {
+            input = "dictionary";
+            //WordModel = new OtherViewModel(input);
             this.InitializeComponent();
-            
+
         }
         
+        public OtherViewModel WordModel { get; set; }
+        public static String input;
+
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            var input = inputText.Text;
+            input = inputText.Text;
             WordModel = new OtherViewModel(input);
+            Bindings.Update();
+            
         }
-
-        public OtherViewModel WordModel { get; set; }
     }
 }
 

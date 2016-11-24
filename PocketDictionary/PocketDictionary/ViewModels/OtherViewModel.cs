@@ -36,7 +36,9 @@ namespace ViewModels
                     get { return _Word; }
                     set
                     {
-                        SetProperty(ref _Word, value);                        
+                        SetProperty(ref _Word, value);
+                        RaisePropertyChanged("_Word");
+            
                     }
                 }
 
@@ -69,8 +71,6 @@ namespace ViewModels
         {
             get { return wordmodel.WordName; }
         }
-
-
 
     }
 }
