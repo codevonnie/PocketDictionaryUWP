@@ -18,11 +18,8 @@ namespace Data
         
         public static async Task<WordModel> GetDefinitionAsync(String input)
         {
-            await Task.Delay(3000);
             myWord = null;
-
             HttpClient client = new HttpClient();
-            //HttpResponseMessage response = await client.GetAsync(new Uri(input));
             Uri requestUri = new Uri("https://owlbot.info/api/v1/dictionary/" + input);
             HttpResponseMessage response = await client.GetAsync(requestUri);
 
@@ -31,8 +28,7 @@ namespace Data
             {
                  
             }
-            //var file = await Package.Current.InstalledLocation.GetFileAsync("Data\\somewords.txt");
-            //var result = await FileIO.ReadTextAsync(file);
+
             var wordList = JsonArray.Parse(result);
 
             foreach (var item in wordList)

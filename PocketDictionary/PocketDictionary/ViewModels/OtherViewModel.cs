@@ -13,9 +13,6 @@ namespace ViewModels
     public class OtherViewModel : NotificationBase
     {
         public WordModel wordmodel { get; set; }
-        //public string wordInput { get; set; }
-
-
 
         public OtherViewModel(String input)
         {
