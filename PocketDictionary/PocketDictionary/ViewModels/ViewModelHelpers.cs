@@ -33,6 +33,7 @@ namespace ViewModels
             return true;
         }
 
+        //notify bound elements that the data has changed
         protected void RaisePropertyChanged(string property)
         {
             if (PropertyChanged != null)

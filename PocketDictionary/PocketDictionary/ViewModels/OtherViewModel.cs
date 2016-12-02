@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Main viewModel
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +15,24 @@ namespace ViewModels
 {
     public class OtherViewModel : NotificationBase
     {
+        //instance of wordmodel
         public WordModel wordmodel { get; set; }
 
+        //constructor for viewmodel takes in user word for search
         public OtherViewModel(String input)
         {
-            wordmodel = new WordModel();
-            var wordInput = input;
-            LoadData(wordInput);
-            
+            wordmodel = new WordModel(); //instantiate wordModel
+            var wordInput = input; 
+            LoadData(wordInput); //passes user input to LoadData method
         }
 
         public OtherViewModel() { }
         
-
+        //create observablecollection to watch for changes in data
         ObservableCollection<WordViewModel> _Word
            = new ObservableCollection<WordViewModel>();
-        
+                
+                //observable collection to reload data if changes are made
                 public ObservableCollection<WordViewModel> WordVM
                 {
                     get { return _Word; }
@@ -40,10 +44,14 @@ namespace ViewModels
                     }
                 }
 
+        //async method to make call to get data from api
         public async void LoadData(String input)
         {
             try {
+                //call async method in Words.cs to get data and save response to wordmodel instance
                 wordmodel = await Words.GetDefinitionAsync(input);
+
+                //if the response has data add new values to observable collection
                 if(wordmodel != null)
                 {
                     var np = new WordViewModel(wordmodel);
@@ -51,11 +59,10 @@ namespace ViewModels
                 }
                 else
                 {
+                    //if response is empty, word has not been found in api so alert user
                     var dialog = new MessageDialog("Word not found - check your spelling");
                     await dialog.ShowAsync();
                 }
-                
-
             }
             catch
             {
@@ -63,7 +70,7 @@ namespace ViewModels
             }
             
         }
-
+        //binding data for xaml page
         public String Type
         {
             get { return wordmodel.WordName; }

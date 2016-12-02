@@ -1,4 +1,6 @@
-﻿using System;
+﻿//use to notify if changes are made to the WordModel so new properties are assigned
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

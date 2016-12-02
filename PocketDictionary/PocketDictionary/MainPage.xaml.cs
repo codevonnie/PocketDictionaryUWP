@@ -18,15 +18,11 @@ using ViewModels;
 
 namespace PocketDictionary
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
         public MainPage()
         {
-            input = "dictionary";
-            //WordModel = new OtherViewModel(input);
+            input = "dictionary"; //dummy value for collection
             this.InitializeComponent();
 
         }
@@ -34,10 +30,14 @@ namespace PocketDictionary
         public OtherViewModel WordModel { get; set; }
         public static String input;
 
+        //event listener for when user clicks search button
         private void searchBtn_Click(object sender, RoutedEventArgs e)
         {
-            input = inputText.Text;
+            //convert word to lowercase for api
+            input = inputText.Text.ToLower();
+            //create new view model based on user input
             WordModel = new OtherViewModel(input);
+            //update observable collection
             Bindings.Update();
             
         }

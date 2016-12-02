@@ -35,14 +35,14 @@
             </StackPanel.DataContext>
             <ListView x:Name="MainList" 
         		ItemsSource="{x:Bind WordModel.WordVM, Mode=OneWay}"  
-        		MinWidth="250" Margin="55,0" Height="364" BorderThickness="38,23,28,32" VerticalAlignment="Center" HorizontalAlignment="Center" >
+        		MinWidth="250" Margin="55,0" Height="472" BorderThickness="38,23,28,32" VerticalAlignment="Center" >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="viewModels:WordViewModel">
-                        <StackPanel Height="234">
-                            <TextBlock Text="{x:Bind Type, Mode=TwoWay}" FontFamily="Segoe Marker" FontSize="20" Height="45" Foreground="#FFF1DFDF" Margin="0,0,1,0"/>
-                            <TextBlock Text="{x:Bind Definition, Mode=TwoWay}" TextWrapping="WrapWholeWords" FontFamily="Segoe Marker" FontSize="20" Height="140" FontWeight="Bold" LineHeight="32" Foreground="#FFF1DFDF" Canvas.ZIndex="-4"/>
-                            <TextBlock Text="{x:Bind Example, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Segoe Marker" FontSize="20" Height="100" FontStyle="Italic" Foreground="#FFF1DFDF"/>
-                        </StackPanel>
+                        <StackPanel Height="385">
+                            <TextBlock Text="{x:Bind Type, Mode=TwoWay}" FontFamily="Segoe Marker" FontSize="20" Foreground="#FFF1DFDF" Margin="0,0,0,10"/>
+                            <TextBlock Text="{x:Bind Example, Mode=TwoWay}" TextWrapping="Wrap" FontFamily="Segoe Marker" FontSize="20" FontStyle="Italic" Foreground="#FFF1DFDF" Margin="0,0,0,10"/>
+                            <TextBlock Text="{x:Bind Definition, Mode=TwoWay}" TextWrapping="WrapWholeWords" FontFamily="Segoe Marker" FontSize="20" Height="222" FontWeight="Bold" LineHeight="32" Foreground="#FFF1DFDF" Canvas.ZIndex="-4" ScrollViewer.HorizontalScrollBarVisibility="Auto"/>
+                          </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

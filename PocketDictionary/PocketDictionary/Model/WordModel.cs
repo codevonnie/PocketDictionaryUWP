@@ -1,4 +1,6 @@
-﻿using System;
+﻿//WordModel class
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ namespace Model
 {
     public class WordModel
     {
+        //getters/setters for WordModel attributes
         public string type { get; set; }
         public string definition { get; set; }
         public string example { get; set; }
@@ -21,6 +24,7 @@ namespace Model
 
         public WordModel() { }
 
+        //overloaded constructor for WordModel
         public WordModel(string t, string d, string e)
         {
             type = t;
