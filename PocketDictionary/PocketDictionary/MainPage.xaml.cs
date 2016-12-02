@@ -37,7 +37,7 @@ namespace PocketDictionary
             //convert word to lowercase for api
             input = inputText.Text.ToLower();
 
-            //check input is only alphabetical characters
+            //check input is only alphabet characters
             var check = IsAllAlphabetic(input);
 
             //if check is true, start call to api
@@ -48,10 +48,10 @@ namespace PocketDictionary
                 //update observable collection
                 Bindings.Update();
             }
-            //if chars entered are not all alphabetical, alert user
+            //if chars entered are not all alphabet characters, alert user
             else
             {
-                var dialog = new MessageDialog("Please only use alphabetical characters");
+                var dialog = new MessageDialog("Please only use alphabet characters");
                 await dialog.ShowAsync();
             }
             check = false;
@@ -63,6 +63,7 @@ namespace PocketDictionary
         {
             foreach (char c in value)
             {
+                //if the character is not a letter return false to trigger user alert
                 if (!char.IsLetter(c))
                     return false;
             }
