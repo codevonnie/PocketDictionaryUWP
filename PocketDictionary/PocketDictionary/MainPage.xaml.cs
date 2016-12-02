@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ViewModels;
 using Windows.UI.Popups;
+using System.Net.NetworkInformation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -23,8 +24,24 @@ namespace PocketDictionary
     {
         public MainPage()
         {
+            //check if device is connected to internet
+            bool isInternetConnected = NetworkInterface.GetIsNetworkAvailable();
+
+            //if no connection is found call method to alert user to connect to internet
+            if (!isInternetConnected)
+            {
+                checkConnection();
+            }
+
             input = "dictionary"; //dummy value for collection
             this.InitializeComponent();
+            
+          }
+        //displays message to user if no internet connection is found
+        private async void checkConnection()
+        {
+            var dialog = new MessageDialog("Please connect to the internet to use app");
+            await dialog.ShowAsync();
 
         }
         
@@ -34,6 +51,14 @@ namespace PocketDictionary
         //event listener for when user clicks search button
         private async void searchBtn_Click(object sender, RoutedEventArgs e)
         {
+
+            bool isInternetConnected = NetworkInterface.GetIsNetworkAvailable();
+
+            //if user tries to search while not connected to internet, alert them they need a connection
+            if (!isInternetConnected)
+            {
+                checkConnection();
+            }
             //convert word to lowercase for api
             input = inputText.Text.ToLower();
 
